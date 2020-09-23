@@ -7,7 +7,7 @@ void primesieve(int *p,int n)         // takes time complexity of O(N log log N)
     {
         p[i]=1;
     }
-    for(int i=3;i<=n;i++)
+    for(int i=3;i<=n;i+=2)
     {
         if(p[i]==1)
         {
