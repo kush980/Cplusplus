@@ -13,15 +13,18 @@ private:
 public:
     int model_no;
     char name[20];
+   // const int msp = 99; //one way of initialization of constant
+    const int msp;
+
 
     //constructor
-    Car()
+    Car():msp(99)
     {
         cout<<"inside the constructor"<<endl;
     }
     //if one have more than one constructor in a program , its called constructor overloading as the name of all the constructor will be same as the name of the Class.
     //parameterised constructor
-    Car(float p,int m,char *n)
+    Car(float p,int m,char *n,int minprice=99):price(p),msp(minprice)
     {
         price = p;
         model_no=m;
@@ -29,26 +32,26 @@ public:
     }
 
     //Copy Constructor
-    Car(Car &x)
-    {
-        cout<<"Copy Constructor"<<endl;
-        price=x.price;
-        model_no=x.model_no;
-        strcpy(name,x.name);
-    } 
+    // Car(const Car &x)
+    // {
+    //     cout<<"Copy Constructor"<<endl;
+    //     price=x.price;
+    //     model_no=x.model_no;
+    //     strcpy(name,x.name);
+    // } 
 
-    void print()
+    void print() const
     {
         cout<<"Name: "<<name<<endl;
         cout<<"Model No.: "<<model_no<<endl;
         cout<<"Price: "<<price<<endl;       //can only access the prive in the class datatype 
     }
 
-    float apply_discount(float x){
+    float apply_discount(const float x){
         price=price*(1.0-x);
         return price;
     }
-    void set_price(float p)     //can access the price in the Car class datatype only
+    void set_price(const float p)     //can access the price in the Car class datatype only
     {
         float msp=140;
         if(p>0)
@@ -57,7 +60,7 @@ public:
         price=msp;
     }
 
-    float get_price()   //can show the price i.e gives the access of read 
+    float get_price() const  //can show the price i.e gives the access of read //const means it is a constant function none members of the function is getting updated
     {
         return price;
     }
