@@ -155,11 +155,136 @@ node* take_input()
     return head;
 }
 
+void reverse(node*&head)
+{
+    node*C=head;
+    node*p=NULL;
+    node*N;
+    while(C!=NULL)
+    {
+        N=C->next;
+        C->next=p;
+        p=C;
+        C=N;
+    }
+    head=p;
+}
+
+node* recreverse(node*head)
+{
+    if(head->next==NULL || head==NULL)
+    {
+        return head;
+    }
+    node*shead=recreverse(head->next);
+
+    node*temp=head->next;
+    temp->next=head;
+    head->next=NULL;
+    return shead;
+}
+
+node* midpoint(node*head)
+{
+    if(head==NULL || head->next==NULL)
+    {
+        return head;
+    }
+    node*slow=head;
+    node*fast=head->next;
+
+    while(fast!=NULL and fast->next!=NULL)
+    {
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+    return slow;
+
+}
+
+//To merge the two sorted linked lists
+node* merge(node*a,node*b)
+{
+    if(a==NULL)
+    {
+        return b;
+    }
+    if(b==NULL)
+    {
+        return a;
+    }
+
+    node*c;
+
+    if(a->data < b->data)
+    {
+        c=a;
+        c->next=merge(a->next,b);
+    }
+    else
+    {
+        c=b;
+        c->next=merge(a,b->next);
+    }
+    return c;
+    
+}
+
+
+//sorting a unsorted linked list through mergesort\
+
+node* mergesort(node*head)
+{
+    //base case
+    if(head==NULL || head->next==NULL)
+    {
+        return head;
+    }
+
+    //recursive case
+    //1. break the linked list from thew mid into 2 parts
+
+    node*c;
+    node*mid=midpoint(head);
+    node*a=head;
+    node*b=mid->next;
+
+    mid->next=NULL;
+
+    //2. recursively sort the broken linked list
+    a=mergesort(a);
+    b=mergesort(b);
+
+    //3. merge the sorted linked list
+
+    c=merge(a,b);
+    return c;
+}
+
 int main()
 {
     // node*head=NULL;
+
+    
     node*head=take_input();
+    //node*head_2=take_input();
     print(head);
+    //print(head_2);
+
+    //node* newhead=merge(head,head_2);
+    node* sorted=mergesort(head);
+    //print(newhead);
+    print(sorted);
+
+    //to get the reversed linked list
+    // head = recreverse(head);
+    // print(head);
+
+
+    //to get the midpoint of the linked list
+    // node* mid=midpoint(head);
+    // cout<<mid->data<<endl;
+
     // insertathead(head,9);
     // insertathead(head,7);
     // insertathead(head,39);
