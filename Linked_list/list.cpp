@@ -78,7 +78,4 @@ int main()
         cout<<s<<"-->";
     }
     cout<<endl;
-
-    cout<<"Rohit chutiya hai aur uska guitar bhi"<<endl;
-
 }
