@@ -29,7 +29,7 @@ int main()
     //front element of the list
     cout<<l1.front()<<endl;
     l1.pop_front();
-    l1.push_front(50);
+    l1.push_front(10);
 
     //iterating over the list
 
@@ -44,4 +44,41 @@ int main()
         cout<<s<<"-->";
     }
     cout<<endl;
+
+
+    //some more functions 
+
+    int n;
+    // cin>>n;
+    // l1.remove(n);
+    for(auto s:l1)
+    {
+        cout<<s<<"-->";
+    }
+    cout<<endl;
+
+    //erase element by position
+    auto it=l1.begin();
+    it++;
+    it++;
+    l1.erase(it);
+    for(auto s:l1)
+    {
+        cout<<s<<"-->";
+    }
+    cout<<endl;
+
+    //insert element by position 
+    auto it1=l2.begin();
+    it1++;
+    it1++;
+    l2.insert(it1,"banana");
+    for(auto s:l2)
+    {
+        cout<<s<<"-->";
+    }
+    cout<<endl;
+
+    cout<<"Rohit chutiya hai aur uska guitar bhi"<<endl;
+
 }
