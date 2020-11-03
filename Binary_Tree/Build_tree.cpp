@@ -47,8 +47,39 @@ void print (node*root)
 
 }
 
+void printIn(node*root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+
+    //otherwise , print in the inorder (left,root,right)
+    printIn(root->left);
+    cout<<root->data<<" ";
+    printIn(root->right);
+}
+
+void printPo(node*root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+
+    //otherwise , print in the postorder(left,right,root)
+    printPo(root->left);
+    printPo(root->right);
+    cout<<root->data<<" ";
+}
+
 int main()
 {
     node*root = buildTree();
     print(root);
+    cout<<endl;
+    printIn(root);
+    cout<<endl;
+    printPo(root);
+    cout<<endl;
 }
