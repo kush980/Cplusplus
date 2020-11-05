@@ -258,9 +258,24 @@ pair<int,bool> balance(node*root)
 
 }
 
+node* builttreefromarray(int *a,int s,int e)
+{
+    if(s>e)
+    {
+        return NULL;
+    }
+
+    int mid=(s+e)/2;
+    node*root=new node (a[mid]);
+    root->left=builttreefromarray(a,s,mid-1);
+    root->right=builttreefromarray(a,mid+1,e);
+
+    return root;
+}
+
 int main()
 {
-    node*root = buildTree();
+    // node*root = buildTree();
     // print(root);
     // cout<<endl;
     // printIn(root);
@@ -269,22 +284,27 @@ int main()
     // cout<<endl;
     // printAlllevel(root);
     // bfs(root);
-    cout<<count(root)<<endl;
-    cout<<sum(root)<<endl;
-    cout<<diameter(root)<<endl;
-    pair<int,int> p1= diameter_opt(root);
-    cout<<p1.first<<endl;
-    cout<<p1.second<<endl;
-    cout<<max(p1.first,p1.second)<<endl;
-    replace_sum(root);
-    bfs(root);
-    if(balance(root).second)
-    {
-        cout<<"balanced tree"<<endl;
-    }
-    else
-    {
-        cout<<"not a balanced tree"<<endl;
-    }
+    // cout<<count(root)<<endl;
+    // cout<<sum(root)<<endl;
+    // cout<<diameter(root)<<endl;
+    // pair<int,int> p1= diameter_opt(root);
+    // cout<<p1.first<<endl;
+    // cout<<p1.second<<endl;
+    // cout<<max(p1.first,p1.second)<<endl;
+    // replace_sum(root);
+    // bfs(root);
+    // if(balance(root).second)
+    // {
+    //     cout<<"balanced tree"<<endl;
+    // }
+    // else
+    // {
+    //     cout<<"not a balanced tree"<<endl;
+    // }
     
+    int a[ ]={1,2,3,4,5,6,7};
+    int n=7;
+
+    node*root=builttreefromarray(a,0,n-1);
+    bfs(root);
 }
