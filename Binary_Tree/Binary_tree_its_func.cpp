@@ -273,9 +273,55 @@ node* builttreefromarray(int *a,int s,int e)
     return root;
 }
 
+
+node* buildInorderfromPreorder(int *in,int*pre,int s,int e)
+{
+    static int i=0;
+    if(s>e)
+    {
+        return NULL;
+    }
+
+    //rec case
+    node*root = new node(pre[i]);
+   int  index=-1;
+    for(int j=s;s<=e;j++)
+    {
+        if(in[i]==pre[j])
+        {
+            index=j;
+            break;
+        }
+    }
+
+    i++;
+
+    root->left = buildInorderfromPreorder(in,pre,s,index-1);
+    root->right = buildInorderfromPreorder(in,pre,index+1,e);
+    return root;
+}
+
+
+void Printrightview(node*root,int level,int &maxlevel)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+
+    if(maxlevel<level)
+    {
+        cout<<root->data<<" ";
+        maxlevel=level;
+    }
+
+    Printrightview(root->right,level+1,maxlevel);
+    Printrightview(root->left,level+1,maxlevel);
+}
+
 int main()
 {
-    // node*root = buildTree();
+    node*root = buildTree();
     // print(root);
     // cout<<endl;
     // printIn(root);
@@ -283,7 +329,7 @@ int main()
     // printPo(root);
     // cout<<endl;
     // printAlllevel(root);
-    // bfs(root);
+    bfs(root);
     // cout<<count(root)<<endl;
     // cout<<sum(root)<<endl;
     // cout<<diameter(root)<<endl;
@@ -302,9 +348,24 @@ int main()
     //     cout<<"not a balanced tree"<<endl;
     // }
     
-    int a[ ]={1,2,3,4,5,6,7};
-    int n=7;
+    // int a[ ]={1,2,3,4,5,6,7};
+    // int n=7;
 
-    node*root=builttreefromarray(a,0,n-1);
-    bfs(root);
+    // node*root=builttreefromarray(a,0,n-1);
+    // bfs(root);
+
+
+    // int in[] = {3,2,8,4,1,6,7,5};
+    // int pre[] = {1,2,3,4,8,5,6,7};
+
+    // int n=sizeof(in)/sizeof(int);
+
+    // node*root=buildInorderfromPreorder(in,pre,0,n-1);
+    // bfs(root);
+    // node*root=NULL;
+    // cin>>root;
+    // cout<<root<<endl;
+    // int maxlevel=-1;
+    // Printrightview(root,0,maxlevel);
+
 }
