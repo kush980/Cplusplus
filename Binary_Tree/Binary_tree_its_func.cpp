@@ -319,6 +319,99 @@ void Printrightview(node*root,int level,int &maxlevel)
     Printrightview(root->left,level+1,maxlevel);
 }
 
+
+node* lca(node*root,int a ,int b)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    if(root->data==a or root->data==b)
+    {
+        return root;
+    }
+
+    node*left = lca(root->left,a,b);
+    node*right = lca(root->right,a,b);
+
+    if(left!=NULL && right!=NULL)
+    {
+        return root;
+    }
+
+    if(left!=NULL)
+    {
+        return left;
+    }
+    return right;
+}
+
+
+// ublic:
+//     int branchsum;
+//     int maxsum;
+
+//     pair()
+//     {
+//         branchsum=0;
+//         maxsum=0;
+//     }class pair
+// {
+// p,
+    pair<int,int> maxsumpath(node*root)
+    {
+        pair<int,int> p;
+        if(root==NULL)
+        {
+            return p;
+        }
+
+        pair<int,int> left = maxsumpath(root->left);
+        pair<int,int> right = maxsumpath(root->right);
+
+        int op1 = root->data;
+        int op2 = left.first + root->data;
+        int op3 = right.first + root->data;
+        int op4 = left.first + right.first + root->data;
+
+        int current_ans = max(op1,(max(op2,max(op3,op4))));
+
+        p.first = max(left.first,max(right.first,0)) + root->data;
+        p.second = max(left.second,max(right.second,current_ans));
+
+        return p;
+    }
+
+
+int search(node*root,int key,int level)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+
+    if(root->data==key)
+    {
+        return level;
+    }
+
+    int left = search(root->left,key,level+1);
+    if(left!=-1)
+    {
+        return  left;
+    }
+
+    return search(root->right,key,level+1);
+}
+
+int distance_bw_twonodes(node*root,int a ,int b)
+{
+    node* lca_node = lca(root,a,b);
+    int l1 = search(lca_node,a,0);
+    int l2 = search(lca_node,b,0);
+    return l1+l2;
+}
+
 int main()
 {
     node*root = buildTree();
@@ -330,6 +423,10 @@ int main()
     // cout<<endl;
     // printAlllevel(root);
     bfs(root);
+    cout<<lca(root,1,14)<<endl;
+    pair<int,int> p2 = maxsumpath(root);
+    cout<<p2.first <<" "<<p2.second<<endl;
+    cout<<distance_bw_twonodes(root,9,14)<<endl;
     // cout<<count(root)<<endl;
     // cout<<sum(root)<<endl;
     // cout<<diameter(root)<<endl;
@@ -339,6 +436,7 @@ int main()
     // cout<<max(p1.first,p1.second)<<endl;
     // replace_sum(root);
     // bfs(root);
+    //input = 8 10 1 -1 -1 6 9 -1 -1 7 -1 -1 3 -1 14 13 -1 -1 -1
     // if(balance(root).second)
     // {
     //     cout<<"balanced tree"<<endl;
@@ -363,7 +461,7 @@ int main()
     // node*root=buildInorderfromPreorder(in,pre,0,n-1);
     // bfs(root);
     // node*root=NULL;
-    // cin>>root;
+    // // cin>>root;
     // cout<<root<<endl;
     // int maxlevel=-1;
     // Printrightview(root,0,maxlevel);
