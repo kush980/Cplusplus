@@ -104,6 +104,18 @@ void inorder(node*root)
     cout<<root->data<<",";
     inorder(root->right);
 }
+void printPo(node*root)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+
+    //otherwise , print in the postorder(left,right,root)
+    printPo(root->left);
+    printPo(root->right);
+    cout<<root->data<<" ";
+}
 
 
 int main()
@@ -113,4 +125,5 @@ int main()
     inorder(root);
     cout<<"\n";
     bfs(root);
+    printPo(root);
 }
