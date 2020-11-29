@@ -66,4 +66,19 @@ public:
         table[idx] = n;
         current_size++;
     }
+
+    void print()
+    {
+        for(int i=0;i<table_size;i++)
+        {
+            cout<<"Bucket "<<i<<"->";
+            node<T>*temp = table[i];
+            while(temp!=NULL)
+            {
+                cout<<temp->key<<"->";
+                temp = temp->next;
+            }
+            cout<<endl;
+        }
+    }
 };
