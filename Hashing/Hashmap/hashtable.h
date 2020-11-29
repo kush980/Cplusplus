@@ -46,7 +46,7 @@ class Hashtable
     }
 
 public:
-    Hashtable(int ts=10)
+    Hashtable(int ts=7)
     {
         table_size=ts;
         table = new node<T>*[table_size];
@@ -60,7 +60,7 @@ public:
     {
         int idx = hashFn(key);
         
-        node<T>*n = new node<T>(key,val);
+        node<T>*n = new node<T>(key,value);
         //insert at the head of the linked list id=idx
         n->next = table[idx];
         table[idx] = n;
