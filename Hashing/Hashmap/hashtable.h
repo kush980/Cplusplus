@@ -117,4 +117,19 @@ public:
             cout<<endl;
         }
     }
+
+    T* search(string key)
+    {
+        int idx = hashFn(key);
+        node<T>*temp = table[idx];
+        while(temp!=NULL)
+        {
+            if(temp->key==key)
+            {
+                return &temp->value;
+            }
+            temp = temp->next;
+        }
+        return NULL;    //T* thats why T* return type
+    }
 };

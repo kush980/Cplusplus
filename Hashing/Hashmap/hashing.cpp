@@ -13,4 +13,15 @@ int main()
     price_menu.insert("Coke",50);
 
     price_menu.print();
+    int *price = price_menu.search("Burger");
+    if(price==NULL)
+    {
+        cout<<"Item not Present"<<endl;
+    }
+    else
+    {
+        cout<<"The price is: "<<*price<<endl;
+    }
+    
+
 }
