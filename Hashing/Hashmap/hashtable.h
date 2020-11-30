@@ -45,6 +45,36 @@ class Hashtable
         return idx;
     }
 
+    void rehash()
+    {
+        node<T>**oldTable = table;
+        int oldTablesize = table_size;
+        table_size = 2*table_size;
+        table = new node<T>*[table_size];
+
+        for(int i=0;i<table_size;i++)
+        {
+            table[i]=NULL;
+        }
+        current_size = 0;
+        //move the elements form oldtable to new table -> rehashing
+        for(int i=0;i<oldTablesize;i++)
+        {
+            node<T>*temp = oldTable[i];
+            while(temp!=NULL)
+            {
+                insert(temp->key,temp->value);
+                temp = temp->next;
+            }
+            if(oldTable[i]!=NULL)
+            {
+                delete oldTable[i];
+            }
+        }
+
+        delete [] oldTable;
+    }
+
 public:
     Hashtable(int ts=7)
     {
@@ -65,6 +95,12 @@ public:
         n->next = table[idx];
         table[idx] = n;
         current_size++;
+
+        float load_factor = current_size/(1.0*table_size);
+        if(load_factor>0.7)
+        {
+            rehash();
+        }
     }
 
     void print()
