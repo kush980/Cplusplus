@@ -132,4 +132,17 @@ public:
         }
         return NULL;    //T* thats why T* return type
     }
+
+    T& operator[](string key)
+    {
+        T *s = search(key);
+        if(s==NULL)
+        {
+            //insert the value with garbage value
+            T garbage;
+            insert(key,garbage);
+            s = search(key);
+        }
+        return *s;
+    }
 };

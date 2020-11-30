@@ -23,5 +23,10 @@ int main()
         cout<<"The price is: "<<*price<<endl;
     }
     
-
+    //insert
+    price_menu["Soup"] = 100;
+    //update
+    price_menu["Soup"]+= 20;
+    //printing
+    cout<<"The price is: "<<price_menu["Soup"]<<endl;  
 }
