@@ -2,7 +2,7 @@
 #include<unordered_map>
 using namespace std;
 
-int lengtharray(int a[],int n)
+int lengthSubarrayKsum(int a[],int n,int k)
 {
     unordered_map<int,int> m;
     int pre = 0;
@@ -11,12 +11,12 @@ int lengtharray(int a[],int n)
     {
         pre+=a[i];
        
-        if(pre==0)
+        if(pre==k)
         len = max(len,i+1);
 
-        if(m.find(pre)!=m.end())
+        if(m.find(pre-k)!=m.end())
         {
-            len=max(len,i-m[pre]);
+            len=max(len,i-m[pre-k]);
         }
         else
         {
@@ -31,12 +31,13 @@ int main()
 {
     int n;
     cin>>n;
-
+    int k;
+    cin>>k;
     int a[n];
     for(int i=0;i<n;i++)
     {
         cin>>a[i];
     }
 
-    cout<<lengtharray(a,n)<<endl;
+    cout<<lengthSubarrayKsum(a,n,k)<<endl;
 }
