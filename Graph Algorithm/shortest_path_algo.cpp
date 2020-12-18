@@ -2,6 +2,7 @@
 #include<map>
 #include<queue>
 #include<list>
+#include<climits>
 using namespace std;
 
 template<typename T>
@@ -19,30 +20,44 @@ public:
 
     void bfs (T src)
     {
-        map<T,int> visited;
+        map<T,int> dist;
         queue<T> q;
 
+        for(auto node_pair:l)
+        {
+            T node = node_pair.first;
+            dist[node] = INT_MAX;
+
+        }  
         q.push(src);
-        visited[src] = true;
+        dist[src] = 0;
 
         while(!q.empty())
         {
             T node = q.front();
             q.pop();
 
-            cout<<node<<" ";
+           // cout<<node<<" ";
 
             for(int nbr:l[node])
             {
-                if(!visited[nbr])
+                if(dist[nbr]==INT_MAX)
                 {
                     q.push(nbr);
                     //mark this as visited
 
-                    visited[nbr] = true;
+                    dist[nbr] = dist[node] + 1;
                 }
             }
 
+        }
+
+        for(auto node_pair:l)
+        {
+            T node = node_pair.first;
+            int d = dist[node];
+
+            cout<<"Node "<<node<<" Dist from src "<<d<<endl;
         }
     }
 
