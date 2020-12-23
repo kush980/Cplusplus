@@ -26,7 +26,7 @@ public:
             return i;
         }
 
-        return parent[i] = find_set(parent[i],parent);
+        return parent[i]=find_set(parent[i],parent);
     }
 
     void union_set(int x,int y,int parent[],int rank[])
@@ -48,47 +48,53 @@ public:
             }
         }
     }
-
-    bool contain_cycle()
+    int pairing()
     {
         int *parent = new int[V];
         int *rank = new int[V];
+
         for(int i=0;i<V;i++)
         {
             parent[i]=-1;
+            rank[i]=1;
         }
 
-        for(auto edge : l)
+        for(auto edge:l)
         {
-            int i = edge.first;
-            int j = edge.second;
+            int i=edge.first;
+            int j=edge.second;
 
-            int s1 = find_set(i,parent);
-            int s2 = find_set(j,parent);
+            int s1=find_set(i,parent);
+            int s2=find_set(j,parent);
 
-            if(s1!=s2)
-            {
-                union_set(s1,s2,parent,rank);   
-            }
-            else
-            {
-                cout<<"Same parents "<<s1<<" and "<<s2<<endl;
-                return true;
-            }
+            union_set(s1,s2,parent,rank);
+
         }
-        delete []parent;;
-        return false;
-    }
-};
 
+        int ans=0;
+        for(int i=0;i<V;i++)
+        {
+            ans+=V - rank[find_set(i,parent)];
+        }
+
+        return ans/2;
+    }
+    
+};
 
 int main()
 {
-    graph g(4);
-    g.addEdge(0,1);
-    g.addEdge(1,2);
-    g.addEdge(2,3);
-    // g.addEdge(3,0);
+    int n,m;
+    cin>>n>>m;
+    graph g(n);
+    while(m--)
+    {
+        int x,y;
+        cin>>x>>y;
+        g.addEdge(x,y);
 
-    cout<<g.contain_cycle()<<endl;
+    }
+
+    cout<<g.pairing()<<endl;
+
 }
