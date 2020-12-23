@@ -3,6 +3,10 @@
 #include<climits>
 using namespace std;
 
+//1. initialize distance with INT_MAX and dist[src]=0
+//2. relax all edges by v-1/n-1 times (most important)
+//3. look for negative cycle ; if found exit otherwise return the distances
+
 vector<int> bellman_ford(int n,int src,vector<vector<int>> edges)
 {
     vector<int> dist(n+1,INT_MAX);
