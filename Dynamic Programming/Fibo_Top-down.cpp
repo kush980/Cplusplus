@@ -35,7 +35,27 @@ int fiBU(int n)
     return dp[n];
 }
 
-//bottom
+//bottom up with space optimisation         //space - O(1)
+int fibspace(int n)
+{
+    if(n==0 or n==1)
+    {
+        return n;
+    }
+
+    int a = 0;
+    int b=1;
+    int c;
+
+    for(int i=2;i<=n;i++)
+    {
+        c = a+b;
+        a=b;
+        b=c;
+    }
+
+    return c;
+}
 
 int main()
 {
@@ -44,5 +64,5 @@ int main()
 
     int dp[100]={0};
 
-    cout<<fibo(n,dp)<<endl;
+    cout<<fibspace(n)<<endl;
 }
