@@ -21,6 +21,25 @@ int maxSum(int a[],int n)
     return max1;
 }
 
+//space optimised algo
+//kadane's algo
+//exception - when all elements are -ve
+
+int maxSumSpace(int a[],int n)
+{
+    int csum = 0;
+    int msum = 0;
+
+    for(int i=0;i<n;i++)
+    {
+        csum+=a[i];
+        if(csum<0)
+        csum = 0;
+        msum = max(msum,csum);
+
+    }
+    return msum;
+}
 
 int main()
 {
@@ -33,4 +52,6 @@ int main()
     }
 
     cout<<maxSum(a,n)<<endl;
+    cout<<maxSumSpace(a,n)<<endl;
+
 }
