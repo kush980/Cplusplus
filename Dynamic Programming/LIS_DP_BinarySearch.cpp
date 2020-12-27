@@ -3,6 +3,12 @@
 #include<climits>
 using namespace std;
 
+//in this method "i" denotes the length and dp[i] denotes the value of the element
+// element will only be stored if its less than greater than previous element and less then next one
+//such that we take out the optimal solution
+//time complexity - O(NlogN)
+
+
 int LIS(int a[],int n)
 {
     int dp[n+1];
