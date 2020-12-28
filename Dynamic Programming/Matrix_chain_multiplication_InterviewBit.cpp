@@ -24,7 +24,9 @@ int solve(vector<int> &a )
             {
                 val = min(val,dp[r][pivot]+dp[pivot+1][c]+a[r]*a[pivot+1]*a[c+1]);
             }
+            
             dp[r][c] = val;
+            r++,c++;
         }
     }
     return dp[0][n];
