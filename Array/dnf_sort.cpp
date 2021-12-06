@@ -1,27 +1,27 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-void dnf_sort(int *a,int n)
+void dnf_sort(int *a, int n)
 {
-    int lo=0;
-    int hi=n-1;
-    int mid=0;
+    int lo = 0;
+    int hi = n - 1;
+    int mid = 0;
 
-    while(mid<=hi)
+    while (mid <= hi)
     {
-        if(a[mid]==0)
+        if (a[mid] == 0)
         {
-            swap(a[mid],a[lo]);
+            swap(a[mid], a[lo]);
             lo++;
             mid++;
         }
-        else if(a[mid]==1)
+        else if (a[mid] == 1)
         {
             mid++;
         }
-        else if(a[mid]==2)
+        else if (a[mid] == 2)
         {
-            swap(a[mid],a[hi]);
+            swap(a[mid], a[hi]);
             hi--;
         }
     }
@@ -30,15 +30,15 @@ void dnf_sort(int *a,int n)
 int main()
 {
     int n;
-    cin>>n;
+    cin >> n;
     int a[n];
-    for(int i=0;i<n;i++)
+    for (int i = 0; i < n; i++)
     {
-        cin>>a[i];
+        cin >> a[i];
     }
-    dnf_sort(a,n);
-    for(int i=0;i<n;i++)
+    dnf_sort(a, n);
+    for (int i = 0; i < n; i++)
     {
-        cout<<a[i]<<" ";
+        cout << a[i] << " ";
     }
 }
